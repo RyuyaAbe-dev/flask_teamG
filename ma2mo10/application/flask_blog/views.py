@@ -26,7 +26,7 @@ def login():
         else:
             # session['logged_in']にTrueをセット(ログイン状態にする)
             session['logged_in'] = True
-            # ログイン成功メッセージを表示
+            # ログイン成功メッセージ
             flash('ログインしました')
             return redirect('/')
     return render_template('login.html')
