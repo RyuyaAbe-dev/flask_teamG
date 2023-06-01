@@ -8,7 +8,7 @@ def show_entries():
     # セッション情報を参照し、ログインしていないとき(session[logged_in] = Falseのとき)の処理
     if not session.get('logged_in'):
         # ログインページに遷移
-        return redirect('/login')
+        return redirect(url_for('login'))
     # ログインしているとき(session[logged_in] = True)の処理
     # トップページに遷移
     return render_template('entries/index.html')
@@ -28,7 +28,7 @@ def login():
             session['logged_in'] = True
             # ログイン成功メッセージ
             flash('ログインしました')
-            return redirect('/')
+            return redirect(url_for('show_entries'))
     return render_template('login.html')
 
 @app.route('/logout')
@@ -36,4 +36,4 @@ def login():
 def logout():
     # ログアウトしたのでセッション情報を削除
     session.pop('logged_in', None)
-    return redirect('/')
+    return redirect(url_for('show_entries'))
