@@ -19,13 +19,15 @@ def login():
     if request.method == 'POST':
         # ユーザ名が異なるとき
         if request.form['username'] != app.config['USERNAME']:
-            print('ユーザ名が異なります')
+            flash('ユーザ名が異なります')
         # パスワードが異なるとき
         elif request.form['password'] != app.config['PASSWORD']:
-            print('パスワードが異なります')
+            flash('パスワードが異なります')
         else:
             # session['logged_in']にTrueをセット(ログイン状態にする)
             session['logged_in'] = True
+            # ログイン成功メッセージを表示
+            flash('ログインしました')
             return redirect('/')
     return render_template('login.html')
 
