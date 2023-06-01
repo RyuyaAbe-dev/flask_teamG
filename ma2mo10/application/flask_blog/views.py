@@ -5,18 +5,22 @@ from flask_blog import app
 @app.route('/')
 # リクエストがあった時の処理  ラッパーに渡す
 def show_entries():
-    # セッション情報を参照し、ログインしていないとき(session[logged_in] = Trueのとき)の処理
+    # セッション情報を参照し、ログインしていないとき(session[logged_in] = Falseのとき)の処理
     if not session.get('logged_in'):
+        # ログインページに遷移
         return redirect('/login')
-
+    # ログインしているとき(session[logged_in] = True)の処理
+    # トップページに遷移
     return render_template('entries/index.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 # ログイン処理
 def login():
     if request.method == 'POST':
+        # ユーザ名が異なるとき
         if request.form['username'] != app.config['USERNAME']:
             print('ユーザ名が異なります')
+        # パスワードが異なるとき
         elif request.form['password'] != app.config['PASSWORD']:
             print('パスワードが異なります')
         else:
