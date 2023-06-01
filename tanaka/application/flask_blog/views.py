@@ -3,6 +3,9 @@ from flask_blog import app
 
 @app.route('/')
 def show_entries():
+    print(session)
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
     return render_template('entries/index.html')
 
 
@@ -10,14 +13,18 @@ def show_entries():
 def login():
     if request.method == 'POST':
         if request.form['username'] != app.config['USERNAME']:
-            print('ユーザ名が異なります')
+            flash('ユーザ名がちwがwうwよwwwww')
         elif request.form['password'] != app.config['PASSWORD']:
-            print('パスワードが異なります')
+            flash('パスワードがちwがwうwよwwwww')
         else:
-            return redirect('/')
+            session['logged_in']=True
+            flash('ログインしました（笑）')
+            return redirect(url_for('show_entries'))
     return render_template('login.html')
 
 
 @app.route('/logout')
 def logout():
-    return redirect('/')
+    session.pop('logged_in', None)
+    flash('ログアウトしました（笑）')
+    return redirect(url_for('show_entries'))
