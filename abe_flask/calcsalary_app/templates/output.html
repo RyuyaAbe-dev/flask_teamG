@@ -7,6 +7,8 @@
     <title>Document</title>
 </head>
 <body>
-    <p> {{ payment }}</p>
+    <p>給与計算アプリ</p>
+    <p> 給与: {{salary}} 円の場合、支給額: {{payment}}円、税額:{{tax}}円</p>
+    <button type="return"><a href="{{ url_for('index') }}">戻る</a></button>
 </body>
 </html>
