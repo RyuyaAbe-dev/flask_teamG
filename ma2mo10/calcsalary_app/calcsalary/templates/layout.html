@@ -11,6 +11,12 @@
         <a class="navbar-brand" href="/input">給与計算アプリ</a>
     </nav>
 
+    {%for message in get_flashed_messages()%}
+    <div class="alert alert-info" role="alert">
+        {{message}}
+    </div>
+    {%endfor%}
+
     <div class="salary-body">
         {%block body%}{%endblock%}
     </div>
