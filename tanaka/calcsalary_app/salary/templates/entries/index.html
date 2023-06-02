@@ -1,0 +1,12 @@
+{%extends "layout.html"%}    
+{%block body%}
+    <div class="salary-body">
+            <form action="/result" method=post>
+                <div class="form-group">
+                    <label for="InputTitle">給与</label>
+                    <input type="int" class="form-control" id="InputTitle" name=salary>
+                </div>
+                <button type="submit" class="btn btn-outline-primary">計算！</button>
+            </form>
+    </div>
+{%endblock%}

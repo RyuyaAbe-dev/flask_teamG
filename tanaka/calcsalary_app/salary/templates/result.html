@@ -1,0 +1,14 @@
+{%extends "layout.html"%}    
+{%block body%}    
+        <div class="salary-body">
+        <form action="/salary_input" method=post>
+            <div class="result">
+            <p>給与：{{salary}}円の場合、支給額：{{payment}}円、税額：{{tax_amount}}円です。</p>
+            </div>
+        </form>
+        </div>
+    <div>
+        <a class="nav-link" href="{{url_for('show_entries')}}">戻る</a>
+    </div>
+
+{%endblock%}
