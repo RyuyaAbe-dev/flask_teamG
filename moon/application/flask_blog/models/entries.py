@@ -7,14 +7,11 @@ class Entry(db.Model):
     title = db.Column(db.String(50), unique=True)
     text = db.Column(db.Text)
     created_at = db.Column(db.DateTime)
-    
+
     def __init__(self, title=None, text=None):
         self.title = title
         self.text = text
         self.created_at = datetime.utcnow()
-    
+
     def __repr__(self):
         return '<Entry id:{} title:{} text:{}>'.format(self.id, self.title, self.text)
-    
-    
-    
