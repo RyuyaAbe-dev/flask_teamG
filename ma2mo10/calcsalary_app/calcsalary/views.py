@@ -1,4 +1,4 @@
-from flask import request, render_template, flash, redirect, url_for
+from flask import request, render_template, flash, redirect, url_for, session
 from decimal import Decimal, ROUND_HALF_UP
 from calcsalary import app
 
@@ -12,7 +12,7 @@ def show_input():
 def calcsalary():
     MAX_INPUT = 9999999999                           # 入力できる上限値
     MILLION = 1000000                                # 100万円
-    total_salary = 0                                 #給与
+    total_salary = 0                                 # 給与
     tax = 0                                          # 税額
     salary = 0                                       # 支給額
     # 給与の計算
@@ -24,14 +24,17 @@ def calcsalary():
         # 入力が10桁より大きかったとき
         elif int(request.form['salary']) > MAX_INPUT:
             flash('給与には最大9,999,999,999まで入力可能です。')
+            session['input_data'] = int(request.form['salary'])
             return redirect(url_for('show_input'))
         # マイナスの値が入力されたとき
         elif int(request.form['salary']) < 0:
             flash('給与にはマイナスの値は入力できません。')
+            session['input_data'] = int(request.form['salary'])
             return redirect(url_for('show_input'))
         else:
             # 入力値を代入
-            total_salary = int(request.form['salary'])       
+            total_salary = int(request.form['salary'])
+            session['input_data'] = total_salary       
             if total_salary > MILLION:
                 tax = int(Decimal(str((total_salary - MILLION) * 0.2)) + Decimal(str(MILLION * 0.1)).quantize(Decimal('0'), rounding=ROUND_HALF_UP))
             else:
