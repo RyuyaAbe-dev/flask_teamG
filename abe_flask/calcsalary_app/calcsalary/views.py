@@ -1,6 +1,6 @@
-from flask import render_template, request, redirect, url_for, Flask
+from flask import render_template, request, redirect, url_for, Flask, flash
 import math
-app = Flask(__name__)
+from calcsalary import app
 
 @app.route('/')
 def index():
@@ -9,9 +9,17 @@ def index():
 @app.route('/calc', methods=['GET', 'POST'])
 def calc():
     tax_rate = 0
-    print(request.form)
     if request.method == 'POST':
+        if request.form.get('salary') == '':
+            flash('給与を入力してください')
+            return render_template('index.html')
+        if len(request.form.get('salary')) > 10:
+            flash('給与には最大9999999999が入力可能です')
+            return render_template('index.html')
         salary = int(request.form.get('salary'))
+        if salary<0:
+            flash('マイナスの値は入力できません')
+            return render_template('index.html')
         if (salary < 1000000):
             tax_rate = 0.1
             tax = salary*tax_rate
@@ -25,6 +33,3 @@ def calc():
             payment = salary - tax
             return render_template('output.html',salary = salary,payment = math.floor(payment), tax= math.floor(tax))
             # return print(f'支給額:{math.floor(payment)}、税額:{math.floor(tax)}',end="")
-
-if __name__ == "__main__":
-    app.run(debug=True)
