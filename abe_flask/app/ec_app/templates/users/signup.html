@@ -1,0 +1,13 @@
+
+{% block content %}
+<h1>ユーザ登録</h1>
+<form action = "{{ url_for('signup') }}" method="POST">
+    <label>メールアドレス</label>
+    <input type="text" name="email">
+    <label for="">ユーザ名</label>
+    <input type="text" name="name">
+    <label for="">パスワード</label>
+    <input type="password" name="password"/>
+    <input type="submit" value="新規登録">
+</form>
+{% endblock %}
