@@ -5,4 +5,4 @@ app = Flask(__name__)
 app.config.from_object('holiday.config')
 
 db = SQLAlchemy(app)
-from holiday import views
+from holiday.views import views,input,maintenance_date
