@@ -1,0 +1,7 @@
+{%extends"layout.html"%}
+{%block body%}
+<h2>処理結果</h2>
+<p>{{ session.get('result_text', None) }}</p>
+<a class="btn btn-primary" href="{{ url_for('show_input') }}" role="button">戻る</a>
+
+{%endblock%}
