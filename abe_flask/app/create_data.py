@@ -16,8 +16,9 @@ with open(filename, encoding='utf-8_sig', newline='') as f:
     for i,row in enumerate(csvreader):
         if i == 0:
             csv_header = row
-        # フシギダネ（No.1）の基本情報を取得するエンドポイント（URL）
         description = ""
+        # if i > 4:
+        #     break
         if i < 300:
             url = f'https://pokeapi.co/api/v2/pokemon-species/{i}'
             response = requests.get(url)
