@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        div.form-check{
+            display: inline;
+        }
+        .search{
+            margin-top: 30px;
+            height: 450px;
+            width: 450px;
+            margin-bottom: 30px;
+        }
+        .search-btn{
+            width:100px;
+            height: 50px;
+            margin-top: 20px;
+            margin: 0,auto;
+        }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+   
+</head>
+<body>
+    <div class = "container">
+        <div class="serch-box bg-light">
+            <div class = "search mt-20 mx-auto">
+                <form action="" method=post class=""></form>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">名前</label>
+                        <input type="name" class="form-control" id="exampleFormControlInput1">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">図鑑番号</label>
+                        <input type="dict_number" class="form-control" id="exampleFormControlInput1">
+                    </div>
+                    {% for type in types%}
+                        {% if loop.index % 5 == 0 %}
+                            <p></p>
+                        {% endif %}
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="{{ type.name }}" id="flexCheckCheckedDisabled" checked>
+                            <label class="form-check-label" for="flexCheckCheckedDisabled">
+                            {{ type.name }}
+                            </label>
+                        </div>
+                    {% endfor %}
+                    <p class="text-center"><button type="submit" class="btn btn-primary search-btn">検索</button></p>
+                </form>
+            </div>
+        </div>
+    <div class="row">
+    {% for pokemon in pokemons %}
+        <div class="col-3 box-skin justify-content-around">
+            <img src="{{ pokemon.image }}"  alt="..." width="200" height="200">
+            <p class="text-center"> {{ pokemon.name }}　　</p>
+        </div>
+    {% endfor %}
+    </div>
+    </div>
+</body>
+</html>

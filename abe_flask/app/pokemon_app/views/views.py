@@ -1,14 +1,11 @@
 from pokemon_app import db
-from pokemon_app.models.tables import Pokemon
+from pokemon_app.models.tables import Pokemon,Type
 import random
+from flask import request, redirect, url_for, render_template, flash, session
+from pokemon_app import app
 
-# for i in range(10):
-#     items = Item(
-#         name=f'アイテム{random.randint(0,1000)}', 
-#         description='textが入ります', 
-#         image=f'https://picsum.photos/200/300?random={random.randint(0,2000)}',
-#         stock=random.randint(0,200),
-#         price=random.randint(0,2000)
-#     )
-#     db.session.add(items)
-#     db.session.commit()
+@app.route('/')
+def show_pokemons():
+    pokemons = Pokemon.query.order_by(Pokemon.id.asc()).all()
+    types = Type.query.order_by(Type.id.asc()).all()
+    return render_template('pokemons/index.html', pokemons=pokemons, types=types)
