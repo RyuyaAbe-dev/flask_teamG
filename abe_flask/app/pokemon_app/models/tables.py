@@ -25,11 +25,26 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return '<User id:{} email:{} name:{}>'.format(self.id, self.email, self.name)
+
+
+class PokemonType(db.Model):
+
+    __tablename__ = 'pokemon_types'
+
+    pokemon_id = db.Column(db.Integer, db.ForeignKey('pokemons.id'), primary_key=True)
+    type_id = db.Column(db.Integer, db.ForeignKey('types.id'), primary_key=True)
     
+    def __init__(self, pokemon_id=None,type_id=None):
+        self.pokemon_id = pokemon_id
+        self.type_id = type_id
+
+    def __repr__(self):
+        return '<Pokemontype id:{} pokemon_id:{} type_id:{}>'.format(self.id, self.pokemon_id, self.type_id)
+
 class Pokemon(db.Model):
     __tablename__ = 'pokemons'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), nullable=False, unique=True)
+    name = db.Column(db.String(50), nullable=False)
     description = db.Column(db.Text)
     image = db.Column(db.String(120))
     height = db.Column(db.Integer)
@@ -44,6 +59,12 @@ class Pokemon(db.Model):
     legend = db.Column(db.String(10), nullable=False, default=False)
     catch_rate = db.Column(db.Integer)
     created_at = db.Column(db.DateTime)
+   
+    types = db.relationship(
+        'Type',
+        secondary=PokemonType.__tablename__,
+        back_populates='pokemons',
+    )
 
     def __init__(self, name=None, description=None, image=None,height=None,weight=None,status=None,hp=None,attack=None,defence=None,special_defence=None
                  ,special_attack=None,speed=None,legend=None,catch_rate=None):
@@ -62,28 +83,9 @@ class Pokemon(db.Model):
         self.legend = legend
         self.catch_rate = catch_rate
         self.created_at = datetime.utcnow()
-        types = db.relationship(
-            'Type',
-            secondary=PokemonType.__tablename__,
-            back_populates='types',
-        )
+
     def __repr__(self):
         return '<Pokemon id:{} name:{} description:{}>'.format(self.id, self.email, self.name)
-
-class PokemonType(db.Model):
-
-    __tablename__ = 'pokemon_types'
-
-    pokemon_id = db.Column(db.Integer, db.ForeignKey('pokemons.id'), primary_key=True)
-    type_id = db.Column(db.Integer, db.ForeignKey('types.id'), primary_key=True)
-    
-    def __init__(self, pokemon_id=None,type_id=None):
-        self.pokemon_id = pokemon_id
-        self.type_id = type_id
-        self.created_at = datetime.utcnow()
-
-    def __repr__(self):
-        return '<Pokemontype id:{} pokemon_id:{} type_id:{}>'.format(self.id, self.pokemon_id, self.type_id)
 
 class Type(db.Model):
 
@@ -92,10 +94,10 @@ class Type(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(255), nullable=False)
 
-    pokemones = db.relationship(
+    pokemons = db.relationship(
         'Pokemon',
         secondary=PokemonType.__tablename__,
-        back_populates='pokemons',
+        back_populates='types',
     )
      
     def __init__(self,name=None):
