@@ -9,3 +9,12 @@ def show_pokemons():
     pokemons = Pokemon.query.order_by(Pokemon.id.asc()).all()
     types = Type.query.order_by(Type.id.asc()).all()
     return render_template('pokemons/index.html', pokemons=pokemons, types=types)
+
+@app.route('/search', methods=['POST'])
+def search():
+    error = None
+    print("aaa")
+    name = request.form['name']
+    number = request.form['number']
+    types = request.form.getlist('checkbox')
+    return render_template('index.html')
