@@ -1,4 +1,4 @@
-from ec_app import app
+from pokemon_app import app
 
 # 起動ファイル
 if __name__ == '__main__':

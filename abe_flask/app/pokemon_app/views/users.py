@@ -3,9 +3,9 @@ from flask import render_template, request, redirect
 from flask_login import login_user, logout_user, login_required
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
-from ec_app import app
-from ec_app import db
-from ec_app.models.users import User
+from pokemon_app import app
+from pokemon_app import db
+from pokemon_app.models.tables import User
 
 
 @app.route('/users/signup', methods=['GET', 'POST'])

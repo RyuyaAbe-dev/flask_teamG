@@ -1,7 +1,7 @@
 from flask_script import Manager
-from ec_app import app
+from pokemon_app import app
 
-from ec_app.scripts.db import InitDB
+from pokemon_app.scripts.db import InitDB
 
 
 if __name__ == "__main__":

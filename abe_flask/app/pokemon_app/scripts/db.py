@@ -1,6 +1,6 @@
 from flask_script import Command
-from ec_app import db
-from ec_app.models.users import User
+from pokemon_app import db
+from pokemon_app.models.tables import User,Pokemon,PokemonType,Type
 
 class InitDB(Command):
     "create database"
