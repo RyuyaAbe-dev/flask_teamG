@@ -39,7 +39,7 @@ class PokemonType(db.Model):
         self.type_id = type_id
 
     def __repr__(self):
-        return '<Pokemontype id:{} pokemon_id:{} type_id:{}>'.format(self.id, self.pokemon_id, self.type_id)
+        return '<pokemon_id:{} type_id:{}>'.format(self.pokemon_id, self.type_id)
 
 class Pokemon(db.Model):
     __tablename__ = 'pokemons'
@@ -85,7 +85,7 @@ class Pokemon(db.Model):
         self.created_at = datetime.utcnow()
 
     def __repr__(self):
-        return '<Pokemon id:{} name:{} description:{}>'.format(self.id, self.email, self.name)
+        return '<Pokemon id:{} name:{} description:{}>'.format(self.id, self.name, self.description)
 
 class Type(db.Model):
 

@@ -32,14 +32,14 @@ with open(filename, encoding='utf-8_sig', newline='') as f:
                 for i in range(len(texts)):
                     if pokemon_data['flavor_text_entries'][i]['language']['name'] == 'ja':
                         description = pokemon_data['flavor_text_entries'][i]['flavor_text']
-                        print(description)
                         break
         for k,h in enumerate(csv_header):
             pokemon_dict[h] = row[k]
-            pokemon_dict['説明'] = description
-            description = ""
+        description = ''.join(description.split())
+        pokemon_dict['説明'] = description
         pokemon_list.append(pokemon_dict)
         pokemon_dict={}
+
 print(pokemon_list)
 
 
