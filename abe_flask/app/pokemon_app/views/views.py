@@ -10,7 +10,8 @@ from sqlalchemy.sql import text, distinct
 def show_pokemons():
     pokemons = Pokemon.query.order_by(Pokemon.id.asc()).all()
     types = Type.query.order_by(Type.id.asc()).all()
-    return render_template('pokemons/index.html', pokemons=pokemons, types=types)
+    type_ids = []
+    return render_template('pokemons/index.html', pokemons=pokemons, types=types, type_checked=type_ids)
 
 @app.route('/pokemons/<int:id>', methods=['GET'])
 def detail_pokemon(id):
@@ -36,4 +37,5 @@ def search():
     print(pokemons)
     for pokemon in pokemons:
         print(pokemon.name)
-    return render_template('pokemons/index.html',pokemons=pokemons, types=types)
+    print(type_ids)
+    return render_template('pokemons/index.html',pokemons=pokemons, types=types, type_checked=type_ids, name=name)

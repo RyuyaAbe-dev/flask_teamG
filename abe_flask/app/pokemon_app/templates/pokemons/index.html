@@ -42,7 +42,7 @@
                 <form action="{{ url_for('search') }}" method=post class="">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">名前</label>
-                        <input name=name type="name" class="form-control" id="exampleFormControlInput1">
+                        <input name=name type="name" class="form-control" id="exampleFormControlInput1" value="{{ name }}">
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">図鑑番号</label>
@@ -63,7 +63,11 @@
                             <p></p>
                         {% endif %}
                         <div class="form-check">
-                            <input name=checkbox class="form-check-input" type="checkbox" value="{{ type.id }}" id="flexCheckCheckedDisabled">
+                            {% if type.id|string in type_checked %}
+                                <input name=checkbox class="form-check-input" type="checkbox" value="{{ type.id }}" checked>
+                            {% else %}
+                                <input name=checkbox class="form-check-input" type="checkbox" value="{{ type.id }}">
+                            {% endif %}
                             <label class="form-check-label" for="flexCheckCheckedDisabled">
                             {{ type.name }}
                             </label>
@@ -79,6 +83,7 @@
     {% for pokemon in pokemons %}
         <div class="col-3 box-skin justify-content-around">
             <a style="text-decoration:none; color:black;" href="{{ url_for('detail_pokemon', id=pokemon.id) }}">
+            <p>図鑑No.{{pokemon.id}}</p>
             <img src="{{ pokemon.image }}"  alt="..." width="200" height="200">
             <p class="text-center"> {{ pokemon.name }}　　</p>
             </a>
