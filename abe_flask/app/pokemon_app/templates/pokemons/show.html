@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .box-skin{
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,.2);
+            width: 500px;
+            height: 950px;
+
+        }
+        .poke-box{
+            margin-top: 20px;
+            height:1200px;
+            
+        }
+        .contents span{
+            font-size: 20px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="poke-box" >
+    <div class="col-5 box-skin" style="margin: 0 auto;">
+        <h3>図鑑No.{{pokemon.id}}</h3>
+        <img src="{{ pokemon.image }}"  style="margin-left: 130px;"alt="..." width="200" height="200">
+        <h3 class="text-center">　{{ pokemon.name }}</h3>
+        <p class="text-center contents"> <span>タイプ:</span>　{% for type in pokemon.types %}{{ type.name }}　{% endfor %}</p>
+        <p class="text-center contents"> <span>高さ:</span>　{{ pokemon.height }}</p>
+        <p class="text-center contents"> <span>重さ:</span>　{{ pokemon.weight }}</p>
+        <p class="text-center contents"> <span>強さ:</span>　{{ pokemon.status }}</p>
+        <p class="text-center contents"> <span>HP:</span>　{{ pokemon.hp }}</p>
+        <p class="text-center contents"> <span>こうげき:</span>　{{ pokemon.attack }}</p>
+        <p class="text-center contents"> <span>ぼうぎょ:</span>　{{ pokemon.defence }}</p>
+        <p class="text-center contents"> <span>どくこう:</span>　{{ pokemon.special_attack }}</p>
+        <p class="text-center contents"> <span>とくぼう:</span>　{{ pokemon.special_defence }}</p>
+        <p class="text-center contents"> <span>スピード:</span>　{{ pokemon.speed }}</p>
+        <p class="text-center contents"> <span>捕まえやすさ:</span>　{{ pokemon.catch_rate }}</p>
+        <p class="text-center contents"> {{ pokemon.description|safe }}</p>
+        <a class="btn btn-primary search-btn" href="{{url_for('show_pokemons')}}" role="button"><p>戻る</p></a>
+    </div>
+    </div>
+</body>
+</html>

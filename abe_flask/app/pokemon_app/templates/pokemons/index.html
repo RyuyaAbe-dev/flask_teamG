@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        div.form-check{
+            display: inline;
+        }
+        .search{
+            margin-top: 30px;
+            height: 450px;
+            width: 450px;
+            margin-bottom: 30px;
+        }
+        .search-btn{
+            width:100px;
+            height: 50px;
+            margin-top: 20px;
+            margin: 0,auto;
+        }
+        .search-btn p{
+            padding: 5px;
+        }
+        div.search-box{
+            height: 300px;
+        }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+   
+</head>
+<body>
+    <div class = "container">
+        <div class="serch-box bg-light">
+            <div class = "search mt-20 mx-auto">
+                <form action="{{ url_for('search') }}" method=post class="">
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">名前</label>
+                        <input name=name type="name" class="form-control" id="exampleFormControlInput1" value="{{ name }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">図鑑番号</label>
+                        <div class="row">
+                          <div class="col-2">
+                            <input style="width:60px;" name=min_num class="form-control" id="Input1" value="1">
+                          </div>
+                          <div style="margin-top: 5px;">
+                            ～
+                          </div>
+                          <div class="col-2">
+                            <input style="width:60px;" name=max_num class="form-control" value="887">
+                          </div>
+                        </div>
+                    </div>
+                    {% for type in types%}
+                        {% if loop.index % 5 == 0 %}
+                            <p></p>
+                        {% endif %}
+                        <div class="form-check">
+                            {% if type.id|string in type_checked %}
+                                <input name=checkbox class="form-check-input" type="checkbox" value="{{ type.id }}" checked>
+                            {% else %}
+                                <input name=checkbox class="form-check-input" type="checkbox" value="{{ type.id }}">
+                            {% endif %}
+                            <label class="form-check-label" for="flexCheckCheckedDisabled">
+                            {{ type.name }}
+                            </label>
+                        </div>
+                    {% endfor %}
+                    <p></p>
+                    <a class="btn btn-primary search-btn align-items-center" href="{{url_for('show_pokemons')}}" role="button"><p>リセット</p></a>
+                    <button type="submit" class="btn btn-primary search-btn">検索</button>
+                </form>
+            </div>
+        </div>
+    <div class="row">
+    {% for pokemon in pokemons %}
+        <div class="col-3 box-skin justify-content-around">
+            <a style="text-decoration:none; color:black;" href="{{ url_for('detail_pokemon', id=pokemon.id) }}">
+            <p>図鑑No.{{pokemon.id}}</p>
+            <img src="{{ pokemon.image }}"  alt="..." width="200" height="200">
+            <p class="text-center"> {{ pokemon.name }}　　</p>
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+    </div>
+</body>
+</html>
