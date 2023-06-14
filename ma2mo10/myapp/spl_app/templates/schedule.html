@@ -1,0 +1,93 @@
+{%extends"layout.html"%}
+{%block body%}
+<div>
+    <p class="text-center font-monospace font-weight-bold h1">スケジュール</p>
+</div>
+
+<div class="container bg-success">
+    <p class="h2 text-center font-weight-bold">ナワバリバトル</p>
+    <table class="table font-weight-bold">
+    <thead>
+        <tr>
+            <th scope="col">時間</th>
+            <th scope="col">ステージ</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%for schedule in nawabari_schedule%}
+        <tr>
+            <td>{{ schedule['start_time'][5:10] }} {{ schedule['start_time'][11:16] }}～{{schedule['end_time'][11:16]}}</td>
+            <td>{{ schedule['stages'][0]['name'] }}   {{ schedule['stages'][1]['name'] }}</td>
+        </tr>
+        {%endfor%}
+    </tbody>
+    </table>
+</div>
+
+<div class="container bg-warning">
+    <p class="h2 text-center font-weight-bold">バンカラマッチ(チャレンジ)</p>
+    <table class="table font-weight-bold">
+    <thead>
+        <tr>
+            <th scope="col">時間</th>
+            <th scope="col">ルール</th>
+            <th scope="col">ステージ</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%for schedule in charenge_schedule%}
+        <tr>
+            <td>{{ schedule['start_time'][5:10] }} {{ schedule['start_time'][11:16] }}～{{schedule['end_time'][11:16]}}</td>
+            <td>{{ schedule['rule']['name'] }}</td>
+            <td>{{ schedule['stages'][0]['name'] }} {{ schedule['stages'][1]['name'] }}</td>
+        </tr>
+        {%endfor%}
+    </tbody>
+    </table>
+</div>
+
+<div class="container bg-warning">
+    <p class="h2 text-center font-weight-bold">バンカラマッチ(オープン)</p>
+    <table class="table font-weight-bold">
+    <thead>
+        <tr>
+            <th scope="col">時間</th>
+            <th scope="col">ルール</th>
+            <th scope="col">ステージ</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%for schedule in open_schedule%}
+        <tr>
+            <td>{{ schedule['start_time'][5:10] }} {{ schedule['start_time'][11:16] }}～{{schedule['end_time'][11:16]}}</td>
+            <td>{{ schedule['rule']['name'] }}</td>
+            <td>{{ schedule['stages'][0]['name'] }} {{ schedule['stages'][1]['name'] }}</td>
+        </tr>
+        {%endfor%}
+    </tbody>
+    </table>
+</div>
+
+<div class="container bg-info">
+    <p class="h2 text-center font-weight-bold">Xマッチ</p>
+    <table class="table font-weight-bold">
+    <thead>
+        <tr>
+            <th scope="col">時間</th>
+            <th scope="col">ルール</th>
+            <th scope="col">ステージ</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%for schedule in x_schedule%}
+        <tr>
+            <td>{{ schedule['start_time'][5:10] }} {{ schedule['start_time'][11:16] }}～{{schedule['end_time'][11:16]}}</td>
+            <td>{{ schedule['rule']['name'] }}</td>
+            <td>{{ schedule['stages'][0]['name'] }} {{ schedule['stages'][1]['name'] }}</td>
+        </tr>
+        {%endfor%}
+    </tbody>
+    </table>
+</div>
+
+{%endblock%}
