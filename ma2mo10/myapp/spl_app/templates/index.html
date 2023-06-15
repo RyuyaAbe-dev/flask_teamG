@@ -1,0 +1,69 @@
+{%extends"layout.html"%}
+{%block body%}
+<div class="p-3 mb-2 text-dark">
+    <p class="text-center font-monospace font-weight-bold h1">現在のステージ</p>
+    <p class="h3 text-center font-weight-bold">{{ nawabari_now['results'][0]['start_time'][11:16] }}～{{ nawabari_now['results'][0]['end_time'][11:16] }}</p>
+</div>
+
+
+<div class="container bg-success rounded">
+<p class="h3 text-center font-weight-bold">ナワバリバトル</p>
+<div class="d-flex justify-content-between">
+    <div class="my-box w-75 ml-auto">
+        <img src="{{ nawabari_now['results'][0]['stages'][0]['image'] }}"  class="rounded">
+        <p class="h4 text-center font-weight-bold">{{ nawabari_now['results'][0]['stages'][0]['name'] }}</p>
+    </div>
+    <div class="my-box w-75 mr-auto">
+        <img src="{{ nawabari_now['results'][0]['stages'][1]['image'] }}"  class="rounded">
+        <p class="h4 text-center font-weight-bold">{{ nawabari_now['results'][0]['stages'][1]['name'] }}</p>
+    </div>
+</div>
+</div>
+
+<div class="container bg-warning rounded">
+<p class="h3 text-center font-weight-bold">バンカラマッチ(チャレンジ)</p>
+<p class="h4 text-center font-weight-bold">{{ charenge_now['results'][0]['rule']['name'] }}</p>
+<div class="d-flex justify-content-between">
+    <div class="my-box w-75 ml-auto">
+        <img src="{{ charenge_now['results'][0]['stages'][0]['image'] }}"  class="rounded shadow-lg">
+        <p class="h4 text-center font-weight-bold">{{ charenge_now['results'][0]['stages'][0]['name'] }}</p>
+    </div>
+    <div class="my-box w-75 mr-auto">
+        <img src="{{ charenge_now['results'][0]['stages'][1]['image'] }}"  class="rounded shadow-lg">
+        <p class="h4 text-center font-weight-bold">{{ charenge_now['results'][0]['stages'][1]['name'] }}</p>
+    </div>
+</div>
+</div>
+
+<div class="container bg-warning rounded">
+<p class="h3 text-center font-weight-bold">バンカラマッチ(オープン)</p>
+<p class="h4 text-center font-weight-bold">{{ open_now['results'][0]['rule']['name'] }}</p>
+<div class="d-flex justify-content-center">
+    <div class="my-box w-75">
+        <img src="{{ open_now['results'][0]['stages'][0]['image'] }}"  class="rounded shadow-lg">
+        <p class="h4 text-center font-weight-bold">{{ open_now['results'][0]['stages'][0]['name'] }}</p>
+    </div>
+    <div class="my-box w-75">
+        <img src="{{ open_now['results'][0]['stages'][1]['image'] }}"  class="rounded shadow-lg">
+        <p class="h4 text-center font-weight-bold">{{ open_now['results'][0]['stages'][1]['name'] }}</p>
+    </div>
+</div>
+</div>
+
+<div class="container bg-info rounded">
+<p class="h3 text-center font-weight-bold">Xマッチ</p>
+<p class="h4 text-center font-weight-bold">{{ x_now['results'][0]['rule']['name'] }}</p>
+<div class="d-flex justify-content-between">
+    <div class="my-box w-75 ml-auto">
+        <img src="{{ x_now['results'][0]['stages'][0]['image'] }}"  class="rounded shadow-lg">
+        <p class="h4 text-center font-weight-bold">{{ x_now['results'][0]['stages'][0]['name'] }}</p>
+    </div>
+    <div class="my-box w-75 mr-auto">
+        <img src="{{ x_now['results'][0]['stages'][1]['image'] }}"  class="rounded shadow-lg">
+        <p class="h4 text-center font-weight-bold">{{ x_now['results'][0]['stages'][1]['name'] }}</p>
+    </div>
+</div>
+</div>
+
+
+{%endblock%}
